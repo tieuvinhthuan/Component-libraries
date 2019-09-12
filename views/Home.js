@@ -13,6 +13,10 @@ const Home = (props) => {
   const {navigation} = props;
   const {getUserFromToken} = mediaAPI();
   getUserFromToken();
+  const {userToContext} = mediaAPI();
+  userToContext().then((user) => {
+    console.log('usercontext', user);
+  });
   return (
     <SafeAreaView style={styles.container}>
       <List navigation={navigation}></List>

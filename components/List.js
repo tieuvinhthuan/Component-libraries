@@ -5,6 +5,8 @@ import {
 } from 'react-native';
 import ListItem from './ListItem';
 import {MediaContext} from '../contexts/MediaContext';
+import {List as BaseList} from 'native-base';
+import {Container} from 'native-base';
 
 const useFetch = (url) => {
   const [media, setMedia] = useContext(MediaContext);
@@ -27,12 +29,18 @@ const List = (props) => {
   console.log(loading);
   console.log('media', media);
   return (
-    <FlatList
-      data={media}
-      renderItem={({item}) =>
-        <ListItem navigation={navigation} singleMedia={item} />}
-      keyExtractor={(item, index) => index.toString()}
-    />
+    <Container>
+      <BaseList
+        dataArray={media}
+        renderRow={
+          (item) => <ListItem
+            navigation={props.navigation}
+            singleMedia={item}
+          />
+        }
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </Container>
   );
 };
 
